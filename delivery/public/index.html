@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Сейчастье — доставка еды из лучших ресторанов города. Горячо, быстро, вкусно. Заказ за 30 минут.">
+<meta property="og:title" content="Сейчастье — Доставка еды">
+<meta property="og:description" content="Лучшие рестораны города — одно нажатие от вас.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&q=80">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#F5C518">
+<link rel="manifest" href="manifest.json">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FoodEstablishment","name":"Сейчастье","description":"Доставка еды из лучших ресторанов города","servesCuisine":"Разная","priceRange":"$$","telephone":"+7-900-123-45-67","address":{"@type":"PostalAddress","streetAddress":"ул. Вкусная, 1","addressLocality":"Москва","addressCountry":"RU"}}</script>
+<title>Сейчастье — Доставка еды</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav" role="navigation" aria-label="Основная навигация">
+  <div class="nav-inner">
+    <a href="#" class="logo" aria-label="Сейчастье — на главную">Сейчастье<span class="logo-dot">.</span></a>
+    <!-- Main links for desktop; will be hidden on mobile -->
+    <ul class="nav-links desktop-links">
+      <li><a href="#menu-section">Меню</a></li>
+      <li><a href="#about">О нас</a></li>
+      <li><a href="#contact">Контакты</a></li>
+    </ul>
+    <div class="nav-right" id="navRight">
+      <div class="search-wrap">
+        <button class="search-toggle" id="searchToggle" aria-label="Поиск по меню" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </button>
+        <div class="search-box" id="searchBox" role="search" aria-hidden="true">
+          <input type="search" id="searchInput" placeholder="Найти блюдо..." aria-label="Поиск по меню" autocomplete="off">
+          <div class="search-results" id="searchResults" role="listbox" aria-label="Результаты поиска"></div>
+        </div>
+      </div>
+      <button class="btn-auth-nav" id="navAuthBtn" aria-label="Войти в систему" onclick="openAuthModal()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span class="auth-label">Вход</span>
+      </button>
+      <button class="btn-profile" id="navProfileBtn" aria-label="Личный кабинет" onclick="openClientPanel()" style="display:none">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span id="navUserName">👤</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <div class="hero-tag">🔥 Горячо и быстро</div>
+    <h1 class="hero-title" id="heroTitle">Еда у двери<br>за <span class="accent" id="heroTime">30 мин</span></h1>
+    <p class="hero-sub" id="heroSub">Лучшие рестораны города — одно нажатие от вас. Свежо, вкусно, вовремя.</p>
+    <div class="hero-actions">
+      <a href="#menu-section" class="btn-primary">Смотреть меню</a>
+      <a href="#about" class="btn-ghost">Узнать больше</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num" id="statOrders">12 000+</span><span class="stat-label">заказов</span></div>
+      <div class="stat"><span class="stat-num" id="statPartners">80+</span><span class="stat-label">партнёров</span></div>
+      <div class="stat"><span class="stat-num" id="statRating">4.9</span><span class="stat-label">рейтинг</span></div>
+    </div>
+  </div>
+  <div class="hero-visual" aria-hidden="true">
+    <div class="hero-blob"></div>
+    <div class="hero-plate">
+      <div class="plate-emoji">🍕</div>
+      <div class="floating-badge fb1">🌶 Острое</div>
+      <div class="floating-badge fb2">⚡ 25 мин</div>
+      <div class="floating-badge fb3">⭐ 4.9</div>
+    </div>
+  </div>
+</section>
+
+<!-- HITS -->
+<section class="hits-section" id="hits-section">
+  <div class="container">
+    <h2 class="section-title">🔥 Хиты дня</h2>
+    <div class="hits-scroll" id="hitsScroll" role="list" aria-label="Популярные блюда"></div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="categories" id="categories">
+  <div class="container">
+    <h2 class="section-title">Категории</h2>
+    <div class="cat-grid" id="catGrid" role="list" aria-label="Категории блюд"></div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu-section" id="menu-section">
+  <div class="container">
+    <div class="menu-header">
+      <h2 class="section-title">Наше меню</h2>
+      <div class="menu-controls">
+        <div class="filter-bar" id="filterBar" role="group" aria-label="Фильтр по категории">
+          <button class="filter-btn active" data-cat="all">Все</button>
+        </div>
+        <div class="sort-wrap">
+          <label for="sortSelect" class="sr-only">Сортировка</label>
+          <select id="sortSelect" class="sort-select" aria-label="Сортировка меню">
+            <option value="default">По умолчанию</option>
+            <option value="price-asc">Цена ↑</option>
+            <option value="price-desc">Цена ↓</option>
+            <option value="hits">Сначала хиты</option>
+            <option value="new">Новинки</option>
+            <option value="fav">♥ Избранное</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="menu-grid" id="menuGrid" role="list" aria-label="Список блюд"></div>
+  </div>
+</section>
+
+<!-- PROMO BANNER -->
+<section class="promo-banner" id="promoBanner">
+  <div class="container">
+    <div class="promo-inner">
+      <div class="promo-text">
+        <div class="promo-tag">🎁 Акция</div>
+        <h2 id="promoTitle">Первый заказ — скидка 10%</h2>
+        <p id="promoDesc">Введите промокод СЕЙЧАСТЬЕ при оформлении</p>
+      </div>
+      <div class="promo-code" id="promoCodeDisplay">СЕЙЧАСТЬЕ</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="container about-inner">
+    <div class="about-text">
+      <div class="section-tag">О компании</div>
+      <h2 class="section-title" id="aboutTitle">Мы доставляем<br>с душой</h2>
+      <p id="aboutText">С 2019 года мы помогаем людям наслаждаться едой из лучших ресторанов города, не выходя из дома. Горячо, быстро, без компромиссов.</p>
+      <ul class="about-list">
+        <li>✅ Гарантия свежести</li>
+        <li>✅ Термо-упаковка</li>
+        <li>✅ Отслеживание заказа</li>
+      </ul>
+    </div>
+    <div class="about-cards">
+      <div class="acard">🚴 <strong>Быстро</strong><p>Среднее время доставки — 28 минут</p></div>
+      <div class="acard">🌡 <strong>Горячо</strong><p>Термосумки для каждого курьера</p></div>
+      <div class="acard">📦 <strong>Бережно</strong><p>Надёжная упаковка без протечек</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section" id="reviews">
+  <div class="container">
+    <h2 class="section-title">Отзывы клиентов</h2>
+    <div class="reviews-grid" id="reviewsGrid" role="list"></div>
+    <div class="reviews-actions">
+      <button class="btn-primary" id="addReviewBtn">Оставить отзыв</button>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <h2 class="section-title">Связь с нами</h2>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <a class="cinfo-item" href="tel:+79001234567">📞 <span id="phone">+7 (900) 123-45-67</span></a>
+        <a class="cinfo-item" href="mailto:hello@seychasye.ru">✉️ <span id="email">hello@seychasye.ru</span></a>
+        <div class="cinfo-item">📍 <span id="address">Москва, ул. Вкусная, 1</span></div>
+        <div class="cinfo-item">🕐 <span id="hours">Пн–Вс: 10:00–23:00</span></div>
+      </div>
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="form-group">
+          <input type="text" name="name" placeholder="Ваше имя *" class="form-input" required aria-required="true" autocomplete="name">
+          <span class="field-error" aria-live="polite"></span>
+        </div>
+        <div class="form-group">
+          <input type="tel" name="phone" placeholder="Телефон *" class="form-input" required aria-required="true" autocomplete="tel">
+          <span class="field-error" aria-live="polite"></span>
+        </div>
+        <div class="form-group">
+          <textarea name="message" placeholder="Сообщение..." class="form-input" rows="4" aria-label="Сообщение"></textarea>
+        </div>
+        <button type="submit" class="btn-primary">Отправить</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <a href="#" class="logo" aria-label="Сейчастье — главная">Сейчастье<span class="logo-dot">.</span></a>
+    <p id="footerText">© 2025 Сейчастье — Доставка еды. Все права защищены.</p>
+    <div class="social-links">
+      <a href="#" aria-label="ВКонтакте">VK</a>
+      <a href="#" aria-label="Telegram">TG</a>
+      <a href="#" aria-label="Instagram">IG</a>
+    </div>
+  </div>
+</footer>
+
+<!-- CART PANEL -->
+<aside class="cart-panel" id="cartPanel" role="dialog" aria-modal="true" aria-label="Корзина">
+  <div class="cart-header">
+    <h2>Корзина</h2>
+    <button class="close-btn" id="closeCart" aria-label="Закрыть корзину">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-promo">
+    <div id="promoProgressWrap" class="promo-progress-wrap" style="display:none">
+      <div class="promo-progress-text" id="promoProgressText"></div>
+      <div class="promo-progress-track"><div class="promo-progress-bar" id="promoProgressBar" style="width:0%"></div></div>
+    </div>
+    <div class="promo-input-wrap">
+      <input type="text" id="promoInput" placeholder="Промокод" class="promo-input" aria-label="Введите промокод">
+      <button class="btn-promo" id="applyPromoBtn">Применить</button>
+    </div>
+    <div class="promo-result" id="promoResult" aria-live="polite"></div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-totals">
+      <div class="cart-total-row"><span>Сумма:</span><span id="cartSubtotal">0 ₽</span></div>
+      <div class="cart-total-row discount-row" id="discountRow" style="display:none"><span>Скидка:</span><span id="cartDiscount" style="color:#27ae60">−0 ₽</span></div>
+      <div class="cart-total-row total-final"><span>Итого:</span><strong id="cartTotal">0 ₽</strong></div>
+    </div>
+    <button class="btn-primary btn-full" id="checkoutBtn">Оформить заказ</button>
+  </div>
+</aside>
+<div class="overlay" id="overlay"></div>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal-wrap" id="checkoutModal" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle" aria-hidden="true">
+  <div class="modal-card checkout-card">
+    <div class="modal-header">
+      <h2 id="checkoutTitle">Оформление заказа</h2>
+      <button class="close-btn" onclick="closeModal('checkoutModal')" aria-label="Закрыть">✕</button>
+    </div>
+    <div class="checkout-steps">
+      <div class="step active" data-step="1">1. Контакты</div>
+      <div class="step" data-step="2">2. Доставка</div>
+      <div class="step" data-step="3">3. Оплата</div>
+    </div>
+    <form id="checkoutForm" novalidate>
+      <!-- Step 1 -->
+      <div class="checkout-step" id="cstep-1">
+        <div class="form-group">
+          <label class="form-label" for="co-name">Имя *</label>
+          <input class="form-input" type="text" id="co-name" placeholder="Иван Иванов" required autocomplete="name">
+          <span class="field-error"></span>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="co-phone">Телефон *</label>
+          <input class="form-input" type="tel" id="co-phone" placeholder="+7 (900) 000-00-00" required autocomplete="tel">
+          <span class="field-error"></span>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="co-email">Email</label>
+          <input class="form-input" type="email" id="co-email" placeholder="ivan@mail.ru" autocomplete="email">
+          <span class="field-error"></span>
+        </div>
+      </div>
+      <!-- Step 2 -->
+      <div class="checkout-step" id="cstep-2" style="display:none">
+        <div class="delivery-type-wrap">
+          <label class="delivery-type-btn">
+            <input type="radio" name="delivery" value="delivery" checked> 🚴 Доставка
+          </label>
+          <label class="delivery-type-btn">
+            <input type="radio" name="delivery" value="pickup"> 🏪 Самовывоз
+          </label>
+        </div>
+        <div id="deliveryFields">
+          <div class="form-group">
+            <label class="form-label" for="co-addr">Адрес *</label>
+            <input class="form-input" type="text" id="co-addr" placeholder="ул. Пушкина, д.1, кв.12" required autocomplete="street-address">
+            <span class="field-error"></span>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="co-flat">Квартира</label>
+              <input class="form-input" type="text" id="co-flat" placeholder="12" autocomplete="off">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="co-floor">Этаж</label>
+              <input class="form-input" type="text" id="co-floor" placeholder="5" autocomplete="off">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="co-intercom">Домофон</label>
+              <input class="form-input" type="text" id="co-intercom" placeholder="125#" autocomplete="off">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="co-time">Время доставки</label>
+          <select class="form-input" id="co-time" autocomplete="off">
+            <option value="asap">Как можно скорее</option>
+            <option value="30">Через 30 минут</option>
+            <option value="60">Через 1 час</option>
+            <option value="custom">Указать время</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="co-comment">Комментарий к заказу</label>
+          <textarea class="form-input" id="co-comment" rows="2" placeholder="Не звонить в дверь, оставить у двери..."></textarea>
+        </div>
+      </div>
+      <!-- Step 3 -->
+      <div class="checkout-step" id="cstep-3" style="display:none">
+        <div class="payment-options">
+          <label class="payment-option">
+            <input type="radio" name="payment" value="cash" checked>
+            <span class="pay-icon">💵</span>
+            <span>Наличными</span>
+          </label>
+          <label class="payment-option">
+            <input type="radio" name="payment" value="card">
+            <span class="pay-icon">💳</span>
+            <span>Картой курьеру</span>
+          </label>
+          <label class="payment-option">
+            <input type="radio" name="payment" value="online">
+            <span class="pay-icon">📱</span>
+            <span>Онлайн (СБП)</span>
+          </label>
+        </div>
+        <div class="order-summary">
+          <h4>Ваш заказ</h4>
+          <div id="coSummaryItems"></div>
+          <div class="co-total-row"><span>Итого:</span><strong id="coTotalFinal">0 ₽</strong></div>
+        </div>
+        <label class="agree-wrap">
+          <input type="checkbox" id="co-agree" required>
+          <span>Согласен с <a href="#" onclick="return false">условиями доставки</a></span>
+        </label>
+        <span class="field-error" id="agreeError"></span>
+      </div>
+      <div class="checkout-nav">
+        <button type="button" class="btn-ghost" id="coPrevBtn" onclick="checkoutPrev()" style="display:none">← Назад</button>
+        <button type="button" class="btn-primary" id="coNextBtn" onclick="checkoutNext()">Далее →</button>
+        <button type="submit" class="btn-primary" id="coSubmitBtn" style="display:none">✓ Подтвердить заказ</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- REVIEW MODAL -->
+<div class="modal-wrap" id="reviewModal" role="dialog" aria-modal="true" aria-labelledby="reviewTitle" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h2 id="reviewTitle">Оставить отзыв</h2>
+      <button class="close-btn" onclick="closeModal('reviewModal')" aria-label="Закрыть">✕</button>
+    </div>
+    <form id="reviewForm" novalidate>
+      <div class="form-group">
+        <label class="form-label" for="rev-name">Ваше имя *</label>
+        <input class="form-input" type="text" id="rev-name" placeholder="Анна" required>
+        <span class="field-error"></span>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Оценка *</label>
+        <div class="star-rating" id="starRating" role="group" aria-label="Оценка от 1 до 5">
+          <button type="button" class="star" data-v="1" aria-label="1 звезда">★</button>
+          <button type="button" class="star" data-v="2" aria-label="2 звезды">★</button>
+          <button type="button" class="star" data-v="3" aria-label="3 звезды">★</button>
+          <button type="button" class="star" data-v="4" aria-label="4 звезды">★</button>
+          <button type="button" class="star" data-v="5" aria-label="5 звёзд">★</button>
+        </div>
+        <input type="hidden" id="rev-rating" value="0">
+        <span class="field-error" id="ratingError"></span>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="rev-text">Отзыв *</label>
+        <textarea class="form-input" id="rev-text" rows="3" placeholder="Расскажите о вашем опыте..." required></textarea>
+        <span class="field-error"></span>
+      </div>
+      <button type="submit" class="btn-primary">Опубликовать</button>
+    </form>
+  </div>
+</div>
+
+<!-- ORDER TRACKING MODAL -->
+<div class="modal-wrap" id="trackingModal" role="dialog" aria-modal="true" aria-labelledby="trackingTitle" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h2 id="trackingTitle">🎉 Заказ принят!</h2>
+      <button class="close-btn" onclick="closeModal('trackingModal')" aria-label="Закрыть">✕</button>
+    </div>
+    <p class="tracking-order-id">Заказ <strong id="trackingOrderId">#000</strong></p>
+    <div class="tracking-timeline" role="list" aria-label="Статус заказа">
+      <div class="track-step done" role="listitem"><div class="track-dot"></div><div class="track-label">Принят</div></div>
+      <div class="track-step" id="ts-prep" role="listitem"><div class="track-dot"></div><div class="track-label">Готовится</div></div>
+      <div class="track-step" id="ts-way" role="listitem"><div class="track-dot"></div><div class="track-label">В пути</div></div>
+      <div class="track-step" id="ts-done" role="listitem"><div class="track-dot"></div><div class="track-label">Доставлен</div></div>
+    </div>
+    <p class="tracking-eta">Ожидайте доставку: <strong id="trackingETA">~30 мин</strong></p>
+    <button class="btn-primary btn-full" onclick="closeModal('trackingModal')">Отлично!</button>
+  </div>
+</div>
+
+<!-- AUTH MODAL -->
+<div class="modal-wrap" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle" aria-hidden="true">
+  <div class="modal-card auth-card">
+    <div class="auth-logo" aria-hidden="true">🔐</div>
+    <h2 class="auth-title" id="authTitle">Вход в систему</h2>
+    <p class="auth-sub" id="authSub">Сейчастье</p>
+    <div class="auth-tabs" id="authTabs">
+      <button class="auth-tab active" data-tab="login">Вход</button>
+      <button class="auth-tab" data-tab="register">Регистрация</button>
+    </div>
+    <!-- Login Form -->
+    <div class="auth-form" id="authLogin">
+      <div class="form-group">
+        <label class="form-label" for="loginUsername">Логин или Email</label>
+        <input class="auth-input" type="text" id="loginUsername" placeholder="Введите логин или email" autocomplete="username">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="loginPassword">Пароль</label>
+        <div class="auth-pass-wrap">
+          <input class="auth-input" type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password">
+          <button class="auth-eye-btn" id="togglePass" type="button" aria-label="Показать/скрыть пароль">👁</button>
+        </div>
+      </div>
+      <div class="auth-error" id="loginError" role="alert" aria-live="assertive"></div>
+      <div class="login-attempts" id="loginAttempts" aria-live="polite"></div>
+      <button class="btn-auth-submit" id="loginSubmitBtn">Войти →</button>
+      <p class="auth-forgot" id="authForgot">Забыли пароль? <a href="#" onclick="showForgotMsg(); return false;">Восстановить</a></p>
+    </div>
+    <!-- Register Form -->
+    <div class="auth-form" id="authRegister" style="display:none">
+      <div class="form-group">
+        <label class="form-label" for="regName">Ваше имя *</label>
+        <input class="auth-input" type="text" id="regName" placeholder="Иван Иванов" autocomplete="name">
+        <span class="field-error" id="regNameErr"></span>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="regUsername">Логин *</label>
+        <input class="auth-input" type="text" id="regUsername" placeholder="ivan_2025" autocomplete="username">
+        <span class="field-error" id="regUsernameErr"></span>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="regEmail">Email</label>
+        <input class="auth-input" type="email" id="regEmail" placeholder="ivan@mail.ru" autocomplete="email">
+        <span class="field-error" id="regEmailErr"></span>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="regPhone">Телефон</label>
+        <input class="auth-input" type="tel" id="regPhone" placeholder="+7 (900) 000-00-00" autocomplete="tel">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="regPassword">Пароль *</label>
+        <div class="auth-pass-wrap">
+          <input class="auth-input" type="password" id="regPassword" placeholder="Минимум 8 символов" autocomplete="new-password">
+          <button class="auth-eye-btn" type="button" onclick="toggleFieldPass('regPassword')">👁</button>
+        </div>
+        <span class="field-error" id="regPassErr"></span>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="regConfirm">Подтвердите пароль *</label>
+        <div class="auth-pass-wrap">
+          <input class="auth-input" type="password" id="regConfirm" placeholder="Повторите пароль" autocomplete="new-password">
+          <button class="auth-eye-btn" type="button" onclick="toggleFieldPass('regConfirm')">👁</button>
+        </div>
+        <span class="field-error" id="regConfirmErr"></span>
+      </div>
+      <div class="auth-error" id="regError" role="alert" aria-live="assertive"></div>
+      <button class="btn-auth-submit" id="regSubmitBtn">Создать аккаунт</button>
+    </div>
+    <!-- Forgot Password Info -->
+    <div class="auth-form" id="authForgotMsg" style="display:none">
+      <div class="forgot-icon">🔑</div>
+      <p class="forgot-text">Для восстановления пароля обратитесь к администратору сайта. Администратор установит вам новый временный пароль.</p>
+      <p class="forgot-contacts">📞 <span id="forgotPhone">+7 (900) 123-45-67</span><br>✉️ <span id="forgotEmail">hello@seychasye.ru</span></p>
+      <button class="btn-auth-submit btn-auth-back" onclick="switchAuthTab('login')">← Вернуться ко входу</button>
+    </div>
+  </div>
+</div>
+
+<!-- CLIENT DASHBOARD -->
+<aside class="client-panel" id="clientPanel" role="dialog" aria-modal="true" aria-label="Личный кабинет">
+  <div class="client-header">
+    <div class="client-header-left">
+      <h2><span>👤</span> Личный кабинет</h2>
+      <span class="client-name-badge" id="clientNameBadge"></span>
+    </div>
+    <div class="client-header-right">
+      <button class="btn-logout" onclick="doLogout()" aria-label="Выйти">Выйти</button>
+      <button class="close-btn" id="closeClient" aria-label="Закрыть">✕</button>
+    </div>
+  </div>
+  <div class="client-body">
+    <div class="client-tabs" role="tablist">
+      <button class="ctab active" data-tab="my-orders" role="tab" aria-selected="true">📦 Заказы</button>
+      <button class="ctab" data-tab="my-profile" role="tab" aria-selected="false">👤 Профиль</button>
+      <button class="ctab" data-tab="my-password" role="tab" aria-selected="false">🔒 Пароль</button>
+    </div>
+    <div class="ctab-content active" id="ctab-my-orders">
+      <h3>Мои заказы</h3>
+      <div id="clientOrdersList"></div>
+    </div>
+    <div class="ctab-content" id="ctab-my-profile">
+      <h3>Мой профиль</h3>
+      <label>Имя</label><input class="client-input" id="cp-name" placeholder="Ваше имя">
+      <label>Email</label><input class="client-input" id="cp-email" type="email" placeholder="email@mail.ru">
+      <label>Телефон</label><input class="client-input" id="cp-phone" type="tel" placeholder="+7 (900) 000-00-00">
+      <div class="client-error" id="cpError" role="alert"></div>
+      <button class="btn-client-save" onclick="saveClientProfile()">💾 Сохранить</button>
+    </div>
+    <div class="ctab-content" id="ctab-my-password">
+      <h3>Смена пароля</h3>
+      <label>Текущий пароль</label>
+      <div class="auth-pass-wrap"><input class="client-input" type="password" id="cp-oldPass" placeholder="Текущий пароль"><button class="auth-eye-btn" type="button" onclick="toggleFieldPass('cp-oldPass')">👁</button></div>
+      <label>Новый пароль</label>
+      <div class="auth-pass-wrap"><input class="client-input" type="password" id="cp-newPass" placeholder="Минимум 8 символов"><button class="auth-eye-btn" type="button" onclick="toggleFieldPass('cp-newPass')">👁</button></div>
+      <label>Подтвердите</label>
+      <div class="auth-pass-wrap"><input class="client-input" type="password" id="cp-confirmPass" placeholder="Повторите пароль"><button class="auth-eye-btn" type="button" onclick="toggleFieldPass('cp-confirmPass')">👁</button></div>
+      <div class="client-error" id="cpPassError" role="alert"></div>
+      <button class="btn-client-save" onclick="changeClientPassword()">🔒 Сменить пароль</button>
+    </div>
+  </div>
+</aside>
+
+<!-- ADMIN PANEL -->
+  <!-- ===== ADMIN PANEL FULLSCREEN ===== -->
+  <aside class="admin-panel" id="adminPanel" role="dialog" aria-modal="true" aria-label="Панель администратора">
+    <div class="admin-sidebar">
+      <div class="admin-sidebar-header">
+        <div class="logo">SEYCHAS<span class="logo-dot">.</span>YE</div>
+        <div class="admin-session-badge">ADMIN</div>
+      </div>
+      <nav class="admin-nav-list" id="adminTabs">
+        <button class="atab active" data-tab="admOrders">
+          <span>🥡 Заказы</span>
+        </button>
+        <button class="atab" data-tab="admMenu">
+          <span>🍕 Меню</span>
+        </button>
+        <button class="atab" data-tab="admCats">
+          <span>📁 Категории</span>
+        </button>
+        <button class="atab" data-tab="admPromo">
+          <span>🎟️ Промокоды</span>
+        </button>
+        <button class="atab" data-tab="admReviews">
+          <span>💬 Отзывы</span>
+        </button>
+        <button class="atab" data-tab="admUsers">
+          <span>👥 Пользователи</span>
+        </button>
+        <button class="atab" data-tab="admSettings">
+          <span>⚙️ Настройки</span>
+        </button>
+      </nav>
+      <div class="admin-sidebar-footer">
+        <button class="btn-logout" id="adminLogout">Выйти</button>
+        <button class="btn-adm btn-adm-cancel" onclick="adminUI.close()">Закрыть</button>
+      </div>
+    </div>
+
+    <div class="admin-main">
+      <header class="admin-topbar">
+        <h3 id="adminCurrentTabTitle">Заказы</h3>
+        <div class="admin-topbar-right">
+          <div id="adminClock" style="font-weight: 700; color: var(--gray); font-size: 0.9rem;"></div>
+          <button class="btn-adm btn-adm-save" id="adminGlobalAction" style="display:none;"></button>
+        </div>
+      </header>
+      
+      <div class="admin-content-scroller">
+        <div class="admin-content-inner">
+          
+          <!-- Tab: Orders -->
+          <div class="atab-content active" id="admOrders">
+            <div class="orders-filters">
+              <button class="filter-btn active" data-status="all">Все</button>
+              <button class="filter-btn" data-status="pending">Новые</button>
+              <button class="filter-btn" data-status="cooking">Готовятся</button>
+              <button class="filter-btn" data-status="delivering">В дороге</button>
+            </div>
+            <div class="adm-list" id="adminOrdersContainer"></div>
+          </div>
+
+          <!-- Tab: Menu -->
+          <div class="atab-content" id="admMenu">
+            <div class="adm-card">
+              <div class="adm-card-header">
+                <h4>Добавить / Редактировать блюдо</h4>
+              </div>
+              <form class="adm-form-grid" id="menuForm">
+                <input type="hidden" id="menuId">
+                <div class="adm-input-group">
+                  <label>Название</label>
+                  <input type="text" id="menuName" class="adm-input" required placeholder="Например: Маргарита">
+                </div>
+                <div class="adm-input-group">
+                  <label>Категория</label>
+                  <select id="menuCat" class="adm-input" required></select>
+                </div>
+                <div class="adm-input-group">
+                  <label>Цена (₽)</label>
+                  <input type="number" id="menuPrice" class="adm-input" required min="0">
+                </div>
+                <div class="adm-input-group">
+                  <label>Скидка (%)</label>
+                  <input type="number" id="menuDiscount" class="adm-input" value="0" min="0" max="100">
+                </div>
+                <div class="adm-input-group" style="grid-column: span 2;">
+                  <label>Описание</label>
+                  <textarea id="menuDesc" class="adm-input" rows="2" placeholder="Состав и особенности..."></textarea>
+                </div>
+                <div class="adm-input-group">
+                   <label>Эмодзи (вместо фото)</label>
+                   <input type="text" id="menuEmoji" class="adm-input" placeholder="🍕">
+                </div>
+                <div class="adm-input-group">
+                   <label>URL Фото (опционально)</label>
+                   <input type="text" id="menuPhoto" class="adm-input" placeholder="https://...">
+                </div>
+                <div class="adm-btn-row" style="grid-column: span 2;">
+                  <button type="submit" class="btn-adm btn-adm-save">Сохранить блюдо</button>
+                  <button type="button" class="btn-adm btn-adm-cancel" onclick="adminUI.resetMenuForm()">Сброс</button>
+                </div>
+              </form>
+            </div>
+            <div class="adm-list" id="adminMenuContainer" style="margin-top: 20px;"></div>
+          </div>
+
+          <!-- Tab: Cats -->
+          <div class="atab-content" id="admCats">
+            <div class="adm-card">
+              <form class="adm-form-grid" id="catForm">
+                <input type="hidden" id="catId">
+                <div class="adm-input-group">
+                  <label>Название категории</label>
+                  <input type="text" id="catNameField" class="adm-input" required>
+                </div>
+                <div class="adm-input-group">
+                  <label>Эмодзи</label>
+                  <input type="text" id="catEmojiField" class="adm-input" required>
+                </div>
+                <div class="adm-btn-row">
+                  <button type="submit" class="btn-adm btn-adm-save">Сохранить</button>
+                </div>
+              </form>
+            </div>
+            <div class="adm-list" id="adminCatsContainer" style="margin-top:20px;"></div>
+          </div>
+
+          <!-- Tab: Promo -->
+          <div class="atab-content" id="admPromo">
+            <div class="adm-card">
+              <form class="adm-form-grid" id="promoForm">
+                <input type="hidden" id="promoId">
+                <div class="adm-input-group">
+                  <label>Код прома</label>
+                  <input type="text" id="promoCodeField" class="adm-input" style="text-transform: uppercase;" required>
+                </div>
+                <div class="adm-input-group">
+                  <label>Размер скидки (%)</label>
+                  <input type="number" id="promoValField" class="adm-input" required min="1" max="100">
+                </div>
+                <div class="adm-input-group">
+                  <label>Тип</label>
+                  <select id="promoTypeField" class="adm-input">
+                     <option value="percent">Процент %</option>
+                     <option value="fixed">Фиксированная сумма ₽</option>
+                  </select>
+                </div>
+                <div class="adm-btn-row">
+                  <button type="submit" class="btn-adm btn-adm-save">Добавить промо</button>
+                </div>
+              </form>
+            </div>
+            <div class="adm-list" id="adminPromoContainer" style="margin-top:20px;"></div>
+          </div>
+
+          <!-- Tab: Reviews -->
+          <div class="atab-content" id="admReviews">
+             <div class="adm-list" id="adminReviewsContainer"></div>
+          </div>
+
+          <!-- Tab: Users -->
+          <div class="atab-content" id="admUsers">
+             <div class="adm-list" id="adminUsersContainer"></div>
+          </div>
+
+          <!-- Tab: Settings (Comprehensive) -->
+          <div class="atab-content" id="admSettings">
+            <form id="settingsForm">
+              <!-- Basic Config -->
+              <div class="adm-card">
+                <div class="adm-card-header"><h4>🏢 Основная информация и Лимиты</h4></div>
+                <div class="adm-form-grid">
+                  <div class="adm-input-group"><label>Название заведения</label><input type="text" name="site_name" class="adm-input"></div>
+                  <div class="adm-input-group"><label>Мин. сумма заказа (₽)</label><input type="number" name="min_order" class="adm-input"></div>
+                  <div class="adm-input-group"><label>Стоимость доставки (₽)</label><input type="number" name="delivery_fee" class="adm-input"></div>
+                  <div class="adm-input-group"><label>Бесплатная доставка от (₽)</label><input type="number" name="free_delivery_from" class="adm-input"></div>
+                  <div class="adm-input-group"><label>Телефон для связи</label><input type="text" name="phone" class="adm-input"></div>
+                  <div class="adm-input-group"><label>Email для заказов</label><input type="email" name="email" class="adm-input"></div>
+                  <div class="adm-input-group"><label>Адрес</label><input type="text" name="address" class="adm-input"></div>
+                  <div class="adm-input-group"><label>Режим работы</label><input type="text" name="hours" class="adm-input"></div>
+                  <div class="adm-input-group" style="flex-direction:row;align-items:center;gap:10px;margin-top:20px;">
+                    <input type="checkbox" name="maintenance_mode" id="maintCheck" style="width:20px;height:20px;"><label for="maintCheck" style="margin:0;cursor:pointer;">Тех. обслуживание</label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Hero & Stats -->
+              <div class="adm-card" style="margin-top:24px;">
+                <div class="adm-card-header"><h4>⚡ Главный экран и Статистика</h4></div>
+                <div class="adm-form-grid">
+                  <div class="adm-input-group"><label>Заголовок (Hero-1)</label><input type="text" name="hero_title" class="adm-input"></div>
+                  <div class="adm-input-group"><label>Время доставки (Hero-2)</label><input type="text" name="hero_time" class="adm-input"></div>
+                  <div class="adm-input-group" style="grid-column:span 2;"><label>Подзаголовок</label><input type="text" name="hero_sub" class="adm-input"></div>
+                  <div class="adm-input-group"><label>Стат: Заказов</label><input type="text" name="stat_orders" class="adm-input"></div>
+                  <div class="adm-input-group"><label>Стат: Партнеров</label><input type="text" name="stat_partners" class="adm-input"></div>
+                  <div class="adm-input-group"><label>Стат: Рейтинг</label><input type="text" name="stat_rating" class="adm-input"></div>
+                </div>
+              </div>
+
+              <!-- About & Footer -->
+              <div class="adm-card" style="margin-top:24px;">
+                <div class="adm-card-header"><h4>📝 О нас и Подвал</h4></div>
+                <div class="adm-form-grid">
+                  <div class="adm-input-group" style="grid-column:span 2;"><label>Заголовок "О нас"</label><input type="text" name="about_title" class="adm-input"></div>
+                  <div class="adm-input-group" style="grid-column:span 2;"><label>Текст "О нас"</label><textarea name="about_text" class="adm-input" style="height:100px;padding:12px;"></textarea></div>
+                  <div class="adm-input-group" style="grid-column:span 2;"><label>Текст в подвале (Footer)</label><input type="text" name="footer" class="adm-input"></div>
+                </div>
+              </div>
+
+              <!-- Design -->
+              <div class="adm-card" style="margin-top:24px;">
+                <div class="adm-card-header"><h4>🎨 Дизайн системы</h4></div>
+                <div class="adm-form-grid">
+                  <div class="adm-input-group"><label>Акцентный цвет</label><input type="color" id="primaryColorPick" class="adm-input" value="#F5C518" style="height:48px;padding:4px;"></div>
+                </div>
+              </div>
+
+              <div class="adm-btn-row" style="margin-top:30px;position:sticky;bottom:0;background:rgba(241,245,249,0.9);padding:20px;backdrop-filter:blur(10px);border-radius:20px;box-shadow:0 -10px 20px rgba(0,0,0,0.05);">
+                <button type="submit" class="btn-adm btn-adm-save" style="width:100%;height:60px;font-size:1.1rem;">🚀 Применить и сохранить все изменения</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+
+
+<!-- TOAST -->
+<div class="toast-wrap" id="toastWrap" aria-live="polite" aria-atomic="false"></div>
+
+<!-- BACK TO TOP -->
+<button class="back-to-top" id="backToTop" aria-label="Наверх">↑</button>
+
+<script src="app.js"></script>
+</body>
+</html>
