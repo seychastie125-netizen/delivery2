@@ -1,9 +1,0 @@
-{
-  "name": "seychasye-delivery",
-  "version": "2.0.0",
-  "private": true,
-  "description": "Сейчастье — система доставки еды с Flask backend и статическим SPA frontend",
-  "scripts": {
-    "start": "python server/app.py"
-  }
-}
